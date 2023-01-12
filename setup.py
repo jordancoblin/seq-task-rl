@@ -23,6 +23,10 @@ setup(
             "py.typed",
             "version.txt",
             "hyperparams/*.yml",
+        ],
+        "rl_zoo3.algorithms": [
+            "py.typed",
+            "version.txt",
         ]
     },
     entry_points={"console_scripts": ["rl_zoo3=rl_zoo3.cli:main"]},
