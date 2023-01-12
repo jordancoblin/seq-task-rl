@@ -1,7 +1,7 @@
 import os
 import shutil
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open(os.path.join("rl_zoo3", "version.txt")) as file_handler:
     __version__ = file_handler.read().strip()
@@ -17,7 +17,7 @@ See https://github.com/DLR-RM/rl-baselines3-zoo
 
 setup(
     name="rl_zoo3",
-    packages=["rl_zoo3", "rl_zoo3.plots"],
+    packages=["rl_zoo3", "rl_zoo3.plots", "rl_zoo3.algorithms"] + [package for package in find_packages() if package.startswith("rl_zoo3.algorithms")],
     package_data={
         "rl_zoo3": [
             "py.typed",

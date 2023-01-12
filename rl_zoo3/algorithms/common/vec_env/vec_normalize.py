@@ -5,10 +5,10 @@ from typing import Any, Dict, List, Optional, Union
 import numpy as np
 from gym import spaces
 
-from stable_baselines3.common import utils
-from stable_baselines3.common.preprocessing import is_image_space
-from stable_baselines3.common.running_mean_std import RunningMeanStd
-from stable_baselines3.common.vec_env.base_vec_env import VecEnv, VecEnvStepReturn, VecEnvWrapper
+from rl_zoo3.algorithms.common import utils
+from rl_zoo3.algorithms.common.preprocessing import is_image_space
+from rl_zoo3.algorithms.common.running_mean_std import RunningMeanStd
+from rl_zoo3.algorithms.common.vec_env.base_vec_env import VecEnv, VecEnvStepReturn, VecEnvWrapper
 
 
 class VecNormalize(VecEnvWrapper):

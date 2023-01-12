@@ -7,9 +7,9 @@ import uuid
 
 import gym
 import numpy as np
-import stable_baselines3 as sb3
+import rl_zoo3.algorithms as sb3
 import torch as th
-from stable_baselines3.common.utils import set_random_seed
+from rl_zoo3.algorithms.common.utils import set_random_seed
 
 # Register custom envs
 import rl_zoo3.import_envs  # noqa: F401 pytype: disable=import-error

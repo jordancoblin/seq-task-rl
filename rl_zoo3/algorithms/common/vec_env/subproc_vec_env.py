@@ -6,7 +6,7 @@ import gym
 import numpy as np
 from gym import spaces
 
-from stable_baselines3.common.vec_env.base_vec_env import (
+from rl_zoo3.algorithms.common.vec_env.base_vec_env import (
     CloudpickleWrapper,
     VecEnv,
     VecEnvIndices,
@@ -19,7 +19,7 @@ def _worker(
     remote: mp.connection.Connection, parent_remote: mp.connection.Connection, env_fn_wrapper: CloudpickleWrapper
 ) -> None:
     # Import here to avoid a circular import
-    from stable_baselines3.common.env_util import is_wrapped
+    from rl_zoo3.algorithms.common.env_util import is_wrapped
 
     parent_remote.close()
     env = env_fn_wrapper.var()

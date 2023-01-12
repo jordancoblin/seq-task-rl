@@ -2,14 +2,14 @@ import os
 
 import numpy as np
 
-from stable_baselines3.a2c import A2C
-from stable_baselines3.common.utils import get_system_info
-from stable_baselines3.ddpg import DDPG
-from stable_baselines3.dqn import DQN
-from stable_baselines3.her.her_replay_buffer import HerReplayBuffer
-from stable_baselines3.ppo import PPO
-from stable_baselines3.sac import SAC
-from stable_baselines3.td3 import TD3
+from rl_zoo3.algorithms.a2c import A2C
+from rl_zoo3.algorithms.common.utils import get_system_info
+from rl_zoo3.algorithms.ddpg import DDPG
+from rl_zoo3.algorithms.dqn import DQN
+from rl_zoo3.algorithms.her.her_replay_buffer import HerReplayBuffer
+from rl_zoo3.algorithms.ppo import PPO
+from rl_zoo3.algorithms.sac import SAC
+from rl_zoo3.algorithms.td3 import TD3
 
 # Small monkey patch so gym 0.21 is compatible with numpy >= 1.24
 # TODO: remove when upgrading to gym 0.26

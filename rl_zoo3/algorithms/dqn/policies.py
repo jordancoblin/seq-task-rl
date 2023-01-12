@@ -4,15 +4,15 @@ import torch as th
 from gym import spaces
 from torch import nn
 
-from stable_baselines3.common.policies import BasePolicy
-from stable_baselines3.common.torch_layers import (
+from rl_zoo3.algorithms.common.policies import BasePolicy
+from rl_zoo3.algorithms.common.torch_layers import (
     BaseFeaturesExtractor,
     CombinedExtractor,
     FlattenExtractor,
     NatureCNN,
     create_mlp,
 )
-from stable_baselines3.common.type_aliases import Schedule
+from rl_zoo3.algorithms.common.type_aliases import Schedule
 
 
 class QNetwork(BasePolicy):

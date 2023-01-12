@@ -5,8 +5,8 @@ from typing import Any, Callable, List, Optional, Sequence, Type, Union
 import gym
 import numpy as np
 
-from stable_baselines3.common.vec_env.base_vec_env import VecEnv, VecEnvIndices, VecEnvObs, VecEnvStepReturn
-from stable_baselines3.common.vec_env.util import copy_obs_dict, dict_to_obs, obs_space_info
+from rl_zoo3.algorithms.common.vec_env.base_vec_env import VecEnv, VecEnvIndices, VecEnvObs, VecEnvStepReturn
+from rl_zoo3.algorithms.common.vec_env.util import copy_obs_dict, dict_to_obs, obs_space_info
 
 
 class DummyVecEnv(VecEnv):
@@ -129,7 +129,7 @@ class DummyVecEnv(VecEnv):
         """Check if worker environments are wrapped with a given wrapper"""
         target_envs = self._get_target_envs(indices)
         # Import here to avoid a circular import
-        from stable_baselines3.common import env_util
+        from rl_zoo3.algorithms.common import env_util
 
         return [env_util.is_wrapped(env_i, wrapper_class) for env_i in target_envs]
 

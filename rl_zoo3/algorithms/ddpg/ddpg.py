@@ -2,11 +2,11 @@ from typing import Any, Dict, Optional, Tuple, Type, TypeVar, Union
 
 import torch as th
 
-from stable_baselines3.common.buffers import ReplayBuffer
-from stable_baselines3.common.noise import ActionNoise
-from stable_baselines3.common.type_aliases import GymEnv, MaybeCallback, Schedule
-from stable_baselines3.td3.policies import TD3Policy
-from stable_baselines3.td3.td3 import TD3
+from rl_zoo3.algorithms.common.buffers import ReplayBuffer
+from rl_zoo3.algorithms.common.noise import ActionNoise
+from rl_zoo3.algorithms.common.type_aliases import GymEnv, MaybeCallback, Schedule
+from rl_zoo3.algorithms.td3.policies import TD3Policy
+from rl_zoo3.algorithms.td3.td3 import TD3
 
 SelfDDPG = TypeVar("SelfDDPG", bound="DDPG")
 

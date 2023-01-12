@@ -5,13 +5,13 @@ import torch as th
 from gym import spaces
 from torch.nn import functional as F
 
-from stable_baselines3.common.buffers import ReplayBuffer
-from stable_baselines3.common.noise import ActionNoise
-from stable_baselines3.common.off_policy_algorithm import OffPolicyAlgorithm
-from stable_baselines3.common.policies import BasePolicy
-from stable_baselines3.common.type_aliases import GymEnv, MaybeCallback, Schedule
-from stable_baselines3.common.utils import get_parameters_by_name, polyak_update
-from stable_baselines3.td3.policies import CnnPolicy, MlpPolicy, MultiInputPolicy, TD3Policy
+from rl_zoo3.algorithms.common.buffers import ReplayBuffer
+from rl_zoo3.algorithms.common.noise import ActionNoise
+from rl_zoo3.algorithms.common.off_policy_algorithm import OffPolicyAlgorithm
+from rl_zoo3.algorithms.common.policies import BasePolicy
+from rl_zoo3.algorithms.common.type_aliases import GymEnv, MaybeCallback, Schedule
+from rl_zoo3.algorithms.common.utils import get_parameters_by_name, polyak_update
+from rl_zoo3.algorithms.td3.policies import CnnPolicy, MlpPolicy, MultiInputPolicy, TD3Policy
 
 SelfTD3 = TypeVar("SelfTD3", bound="TD3")
 

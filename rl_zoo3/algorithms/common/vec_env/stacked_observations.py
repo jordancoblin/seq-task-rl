@@ -4,7 +4,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 import numpy as np
 from gym import spaces
 
-from stable_baselines3.common.preprocessing import is_image_space, is_image_space_channels_first
+from rl_zoo3.algorithms.common.preprocessing import is_image_space, is_image_space_channels_first
 
 
 class StackedObservations:

@@ -4,9 +4,9 @@ import torch as th
 from gym import spaces
 from torch import nn
 
-from stable_baselines3.common.policies import BasePolicy, ContinuousCritic
-from stable_baselines3.common.preprocessing import get_action_dim
-from stable_baselines3.common.torch_layers import (
+from rl_zoo3.algorithms.common.policies import BasePolicy, ContinuousCritic
+from rl_zoo3.algorithms.common.preprocessing import get_action_dim
+from rl_zoo3.algorithms.common.torch_layers import (
     BaseFeaturesExtractor,
     CombinedExtractor,
     FlattenExtractor,
@@ -14,7 +14,7 @@ from stable_baselines3.common.torch_layers import (
     create_mlp,
     get_actor_critic_arch,
 )
-from stable_baselines3.common.type_aliases import Schedule
+from rl_zoo3.algorithms.common.type_aliases import Schedule
 
 
 class Actor(BasePolicy):

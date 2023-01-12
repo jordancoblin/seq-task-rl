@@ -4,7 +4,7 @@ import gym
 import numpy as np
 from gym import spaces
 
-from stable_baselines3.common.type_aliases import GymStepReturn
+from rl_zoo3.algorithms.common.type_aliases import GymStepReturn
 
 
 class SimpleMultiObsEnv(gym.Env):

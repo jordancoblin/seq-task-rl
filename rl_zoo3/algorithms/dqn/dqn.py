@@ -6,13 +6,13 @@ import torch as th
 from gym import spaces
 from torch.nn import functional as F
 
-from stable_baselines3.common.buffers import ReplayBuffer
-from stable_baselines3.common.off_policy_algorithm import OffPolicyAlgorithm
-from stable_baselines3.common.policies import BasePolicy
-from stable_baselines3.common.preprocessing import maybe_transpose
-from stable_baselines3.common.type_aliases import GymEnv, MaybeCallback, Schedule
-from stable_baselines3.common.utils import get_linear_fn, get_parameters_by_name, is_vectorized_observation, polyak_update
-from stable_baselines3.dqn.policies import CnnPolicy, DQNPolicy, MlpPolicy, MultiInputPolicy
+from rl_zoo3.algorithms.common.buffers import ReplayBuffer
+from rl_zoo3.algorithms.common.off_policy_algorithm import OffPolicyAlgorithm
+from rl_zoo3.algorithms.common.policies import BasePolicy
+from rl_zoo3.algorithms.common.preprocessing import maybe_transpose
+from rl_zoo3.algorithms.common.type_aliases import GymEnv, MaybeCallback, Schedule
+from rl_zoo3.algorithms.common.utils import get_linear_fn, get_parameters_by_name, is_vectorized_observation, polyak_update
+from rl_zoo3.algorithms.dqn.policies import CnnPolicy, DQNPolicy, MlpPolicy, MultiInputPolicy
 
 SelfDQN = TypeVar("SelfDQN", bound="DQN")
 
@@ -188,7 +188,6 @@ class DQN(OffPolicyAlgorithm):
         for _ in range(gradient_steps):
             # Sample replay buffer
             replay_data = self.replay_buffer.sample(batch_size, env=self._vec_normalize_env)
-
             with th.no_grad():
                 # Compute the next Q-values using the target network
                 next_q_values = self.q_net_target(replay_data.next_observations)

@@ -13,17 +13,17 @@ import numpy as np
 import torch as th
 from gym import spaces
 
-from stable_baselines3.common import utils
-from stable_baselines3.common.callbacks import BaseCallback, CallbackList, ConvertCallback, ProgressBarCallback
-from stable_baselines3.common.env_util import is_wrapped
-from stable_baselines3.common.logger import Logger
-from stable_baselines3.common.monitor import Monitor
-from stable_baselines3.common.noise import ActionNoise
-from stable_baselines3.common.policies import BasePolicy
-from stable_baselines3.common.preprocessing import check_for_nested_spaces, is_image_space, is_image_space_channels_first
-from stable_baselines3.common.save_util import load_from_zip_file, recursive_getattr, recursive_setattr, save_to_zip_file
-from stable_baselines3.common.type_aliases import GymEnv, MaybeCallback, Schedule
-from stable_baselines3.common.utils import (
+from rl_zoo3.algorithms.common import utils
+from rl_zoo3.algorithms.common.callbacks import BaseCallback, CallbackList, ConvertCallback, ProgressBarCallback
+from rl_zoo3.algorithms.common.env_util import is_wrapped
+from rl_zoo3.algorithms.common.logger import Logger
+from rl_zoo3.algorithms.common.monitor import Monitor
+from rl_zoo3.algorithms.common.noise import ActionNoise
+from rl_zoo3.algorithms.common.policies import BasePolicy
+from rl_zoo3.algorithms.common.preprocessing import check_for_nested_spaces, is_image_space, is_image_space_channels_first
+from rl_zoo3.algorithms.common.save_util import load_from_zip_file, recursive_getattr, recursive_setattr, save_to_zip_file
+from rl_zoo3.algorithms.common.type_aliases import GymEnv, MaybeCallback, Schedule
+from rl_zoo3.algorithms.common.utils import (
     check_for_correct_spaces,
     get_device,
     get_schedule_fn,
@@ -31,7 +31,7 @@ from stable_baselines3.common.utils import (
     set_random_seed,
     update_learning_rate,
 )
-from stable_baselines3.common.vec_env import (
+from rl_zoo3.algorithms.common.vec_env import (
     DummyVecEnv,
     VecEnv,
     VecNormalize,

@@ -6,13 +6,13 @@ import numpy as np
 import torch as th
 from gym import spaces
 
-from stable_baselines3.common.base_class import BaseAlgorithm
-from stable_baselines3.common.buffers import DictRolloutBuffer, RolloutBuffer
-from stable_baselines3.common.callbacks import BaseCallback
-from stable_baselines3.common.policies import ActorCriticPolicy
-from stable_baselines3.common.type_aliases import GymEnv, MaybeCallback, Schedule
-from stable_baselines3.common.utils import obs_as_tensor, safe_mean
-from stable_baselines3.common.vec_env import VecEnv
+from rl_zoo3.algorithms.common.base_class import BaseAlgorithm
+from rl_zoo3.algorithms.common.buffers import DictRolloutBuffer, RolloutBuffer
+from rl_zoo3.algorithms.common.callbacks import BaseCallback
+from rl_zoo3.algorithms.common.policies import ActorCriticPolicy
+from rl_zoo3.algorithms.common.type_aliases import GymEnv, MaybeCallback, Schedule
+from rl_zoo3.algorithms.common.utils import obs_as_tensor, safe_mean
+from rl_zoo3.algorithms.common.vec_env import VecEnv
 
 SelfOnPolicyAlgorithm = TypeVar("SelfOnPolicyAlgorithm", bound="OnPolicyAlgorithm")
 

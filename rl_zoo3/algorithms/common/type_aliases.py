@@ -13,7 +13,7 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Protocol
 
-from stable_baselines3.common import callbacks, vec_env
+from rl_zoo3.algorithms.common import callbacks, vec_env
 
 GymEnv = Union[gym.Env, vec_env.VecEnv]
 GymObs = Union[Tuple, Dict[str, Any], np.ndarray, int]

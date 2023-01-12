@@ -1,6 +1,6 @@
 atari:
   env_wrapper:
-    - stable_baselines3.common.atari_wrappers.AtariWrapper
+    - rl_zoo3.algorithms.common.atari_wrappers.AtariWrapper
   frame_stack: 4
   policy: 'CnnPolicy'
   n_timesteps: !!float 1e7

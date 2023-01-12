@@ -5,19 +5,19 @@ import os
 from typing import Any, Callable, Dict, List, Optional, Tuple, Type, Union
 
 import gym
-import stable_baselines3 as sb3  # noqa: F401
+import rl_zoo3.algorithms as sb3  # noqa: F401
 import torch as th  # noqa: F401
 import yaml
 from gym import spaces
 from huggingface_hub import HfApi
 from huggingface_sb3 import EnvironmentName, ModelName
 from sb3_contrib import ARS, QRDQN, TQC, TRPO, RecurrentPPO
-from stable_baselines3 import A2C, DDPG, DQN, PPO, SAC, TD3
-from stable_baselines3.common.base_class import BaseAlgorithm
-from stable_baselines3.common.callbacks import BaseCallback
-from stable_baselines3.common.env_util import make_vec_env
-from stable_baselines3.common.sb2_compat.rmsprop_tf_like import RMSpropTFLike  # noqa: F401
-from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv, VecEnv, VecFrameStack, VecNormalize
+from rl_zoo3.algorithms import A2C, DDPG, DQN, PPO, SAC, TD3
+from rl_zoo3.algorithms.common.base_class import BaseAlgorithm
+from rl_zoo3.algorithms.common.callbacks import BaseCallback
+from rl_zoo3.algorithms.common.env_util import make_vec_env
+from rl_zoo3.algorithms.common.sb2_compat.rmsprop_tf_like import RMSpropTFLike  # noqa: F401
+from rl_zoo3.algorithms.common.vec_env import DummyVecEnv, SubprocVecEnv, VecEnv, VecFrameStack, VecNormalize
 
 # For custom activation fn
 from torch import nn as nn  # noqa: F401 pylint: disable=unused-import
@@ -123,7 +123,7 @@ def get_wrapper_class(hyperparams: Dict[str, Any], key: str = "env_wrapper") -> 
 def get_class_by_name(name: str) -> Type:
     """
     Imports and returns a class given the name, e.g. passing
-    'stable_baselines3.common.callbacks.CheckpointCallback' returns the
+    'rl_zoo3.algorithms.common.callbacks.CheckpointCallback' returns the
     CheckpointCallback class.
 
     :param name:
@@ -145,13 +145,13 @@ def get_callback_list(hyperparams: Dict[str, Any]) -> List[BaseCallback]:
     Get one or more Callback class specified as a hyper-parameter
     "callback".
     e.g.
-    callback: stable_baselines3.common.callbacks.CheckpointCallback
+    callback: rl_zoo3.algorithms.common.callbacks.CheckpointCallback
 
     for multiple, specify a list:
 
     callback:
         - rl_zoo3.callbacks.PlotActionWrapper
-        - stable_baselines3.common.callbacks.CheckpointCallback
+        - rl_zoo3.algorithms.common.callbacks.CheckpointCallback
 
     :param hyperparams:
     :return:
