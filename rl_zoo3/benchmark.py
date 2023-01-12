@@ -8,7 +8,7 @@ from typing import Dict, List
 import numpy as np
 import pandas as pd
 import pytablewriter
-from stable_baselines3.common.results_plotter import load_results, ts2xy
+from rl_zoo3.algorithms.common.results_plotter import load_results, ts2xy
 
 from rl_zoo3.utils import get_hf_trained_models, get_latest_run_id, get_saved_hyperparams, get_trained_models
 

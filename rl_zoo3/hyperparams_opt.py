@@ -2,7 +2,7 @@ from typing import Any, Dict
 
 import numpy as np
 import optuna
-from stable_baselines3.common.noise import NormalActionNoise, OrnsteinUhlenbeckActionNoise
+from rl_zoo3.algorithms.common.noise import NormalActionNoise, OrnsteinUhlenbeckActionNoise
 from torch import nn as nn
 
 from rl_zoo3 import linear_schedule

@@ -5,8 +5,8 @@ import sys
 import numpy as np
 import yaml
 from huggingface_sb3 import EnvironmentName
-from stable_baselines3.common.utils import set_random_seed
-from stable_baselines3.common.vec_env import VecVideoRecorder
+from rl_zoo3.algorithms.common.utils import set_random_seed
+from rl_zoo3.algorithms.common.vec_env import VecVideoRecorder
 
 from rl_zoo3.exp_manager import ExperimentManager
 from rl_zoo3.utils import ALGOS, StoreDict, create_test_env, get_model_path, get_saved_hyperparams

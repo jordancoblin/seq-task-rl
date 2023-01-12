@@ -7,8 +7,8 @@ import os
 import numpy as np
 import seaborn
 from matplotlib import pyplot as plt
-from stable_baselines3.common.monitor import LoadMonitorResultsError, load_results
-from stable_baselines3.common.results_plotter import X_EPISODES, X_TIMESTEPS, X_WALLTIME, ts2xy, window_func
+from rl_zoo3.algorithms.common.monitor import LoadMonitorResultsError, load_results
+from rl_zoo3.algorithms.common.results_plotter import X_EPISODES, X_TIMESTEPS, X_WALLTIME, ts2xy, window_func
 
 # Activate seaborn
 seaborn.set()

@@ -1,9 +1,9 @@
 import gym
 import pybullet_envs  # noqa: F401
 import pytest
-from stable_baselines3 import A2C
-from stable_baselines3.common.env_checker import check_env
-from stable_baselines3.common.env_util import DummyVecEnv
+from rl_zoo3.algorithms import A2C
+from rl_zoo3.algorithms.common.env_checker import check_env
+from rl_zoo3.algorithms.common.env_util import DummyVecEnv
 
 from rl_zoo3.utils import get_wrapper_class
 from rl_zoo3.wrappers import ActionNoiseWrapper, DelayedRewardWrapper, HistoryWrapper, TimeFeatureWrapper
@@ -39,8 +39,8 @@ def test_get_wrapper(env_wrapper):
     "vec_env_wrapper",
     [
         None,
-        {"stable_baselines3.common.vec_env.VecFrameStack": dict(n_stack=2)},
-        [{"stable_baselines3.common.vec_env.VecFrameStack": dict(n_stack=3)}, "stable_baselines3.common.vec_env.VecMonitor"],
+        {"rl_zoo3.algorithms.common.vec_env.VecFrameStack": dict(n_stack=2)},
+        [{"rl_zoo3.algorithms.common.vec_env.VecFrameStack": dict(n_stack=3)}, "rl_zoo3.algorithms.common.vec_env.VecMonitor"],
     ],
 )
 def test_get_vec_env_wrapper(vec_env_wrapper):

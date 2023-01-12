@@ -14,9 +14,9 @@ from huggingface_hub import HfApi, Repository
 from huggingface_hub.repocard import metadata_save
 from huggingface_sb3 import EnvironmentName, ModelName, ModelRepoId
 from huggingface_sb3.push_to_hub import _evaluate_agent, _generate_replay, generate_metadata
-from stable_baselines3.common.base_class import BaseAlgorithm
-from stable_baselines3.common.utils import set_random_seed
-from stable_baselines3.common.vec_env import VecEnv, unwrap_vec_normalize
+from rl_zoo3.algorithms.common.base_class import BaseAlgorithm
+from rl_zoo3.algorithms.common.utils import set_random_seed
+from rl_zoo3.algorithms.common.vec_env import VecEnv, unwrap_vec_normalize
 from wasabi import Printer
 
 import rl_zoo3.import_envs  # noqa: F401 pylint: disable=unused-import
