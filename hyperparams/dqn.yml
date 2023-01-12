@@ -35,7 +35,7 @@ CartPole-v1:
 
 # Tuned
 MountainCar-v0:
-  n_timesteps: !!float 1.2e5
+  n_timesteps: !!float 3e5
   policy: 'MlpPolicy'
   learning_rate: !!float 4e-3
   batch_size: 128
