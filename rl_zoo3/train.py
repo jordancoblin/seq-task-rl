@@ -156,6 +156,7 @@ def train() -> None:
     parser.add_argument(
         "-tags", "--wandb-tags", type=str, default=[], nargs="+", help="Tags for wandb run, e.g.: -tags optimized pr-123"
     )
+    parser.add_argument("--wandb-group", type=str, default=None, help="the (optional) group of a wandb experiment")
 
     args = parser.parse_args()
 
@@ -215,6 +216,7 @@ def train() -> None:
             name=run_name,
             project=args.wandb_project_name,
             entity=args.wandb_entity,
+            group=args.wandb_group,
             tags=tags,
             config=vars(args),
             sync_tensorboard=True,  # auto-upload sb3's tensorboard metrics

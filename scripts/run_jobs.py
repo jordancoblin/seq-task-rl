@@ -6,32 +6,40 @@ from typing import List
 
 import numpy as np
 
-ALGOS = ["sac"]
-ENVS = ["MountainCarContinuous-v0"]
-N_SEEDS = 10
-EVAL_FREQ = 5000
-N_EVAL_EPISODES = 10
-LOG_STD_INIT = [-6, -5, -4, -3, -2, -1, 0, 1]
+ALGOS = ["dqn"]
+# ENVS = ["Acrobot-v1"]
+ENVS = ["MountainCar-v0"]
+N_SEEDS = 5
+SEED_START = 100
+EVAL_FREQ = 20000
+N_EVAL_EPISODES = 5
+WANDB_PROJECT_NAME = "seq-task-rl"
+WANDB_GROUP = "acrobot_hypers"
 
 for algo in ALGOS:
     for env_id in ENVS:
-        for log_std_init in LOG_STD_INIT:
-            log_folder = f"logs_std_{np.exp(log_std_init):.4f}"
-            for _ in range(N_SEEDS):
-                args = [
-                    "--algo",
-                    algo,
-                    "--env",
-                    env_id,
-                    "--hyperparams",
-                    f"policy_kwargs:dict(log_std_init={log_std_init}, net_arch=[64, 64])",
-                    "--eval-episodes",
-                    N_EVAL_EPISODES,
-                    "--eval-freq",
-                    EVAL_FREQ,
-                    "-f",
-                    log_folder,
-                ]
-                arg_str_list: List[str] = list(map(str, args))
+        log_folder = f"logs_{WANDB_GROUP}"
+        for N in range(N_SEEDS):
+            seed = SEED_START + N
+            args = [
+                "--algo",
+                algo,
+                "--env",
+                env_id,
+                "--seed",
+                seed,
+                "--eval-episodes",
+                N_EVAL_EPISODES,
+                "--eval-freq",
+                EVAL_FREQ,
+                "-f",
+                log_folder,
+                "--track",
+                "--wandb-project-name",
+                WANDB_PROJECT_NAME,
+                "--wandb-group",
+                WANDB_GROUP,
+            ]
+            arg_str_list: List[str] = list(map(str, args))
 
-                ok = subprocess.call(["python", "train.py"] + arg_str_list)
+            ok = subprocess.call(["python", "train.py"] + arg_str_list)

@@ -34,19 +34,35 @@ CartPole-v1:
   policy_kwargs: "dict(net_arch=[256, 256])"
 
 # Tuned
+# MountainCar-v0:
+#   n_timesteps: !!float 1.2e5
+#   policy: 'MlpPolicy'
+#   learning_rate: !!float 4e-3
+#   batch_size: 128
+#   buffer_size: 10000
+#   learning_starts: 1000
+#   gamma: 0.98
+#   target_update_interval: 600
+#   train_freq: 16
+#   gradient_steps: 8
+#   exploration_fraction: 0.2
+#   exploration_final_eps: 0.07
+#   policy_kwargs: "dict(net_arch=[256, 256])"
+
+# Acrobot hypers
 MountainCar-v0:
-  n_timesteps: !!float 3.6e5
+  n_timesteps: !!float 1.2e5
   policy: 'MlpPolicy'
-  learning_rate: !!float 4e-3
+  learning_rate: !!float 6.3e-4
   batch_size: 128
-  buffer_size: 10000
+  buffer_size: 50000
   learning_starts: 1000
-  gamma: 0.98
-  target_update_interval: 600
-  train_freq: 16
-  gradient_steps: 8
-  exploration_fraction: 0.2
-  exploration_final_eps: 0.07
+  gamma: 0.99
+  target_update_interval: 250
+  train_freq: 4
+  gradient_steps: -1
+  exploration_fraction: 0.12
+  exploration_final_eps: 0.1
   policy_kwargs: "dict(net_arch=[256, 256])"
 
 # Tuned
@@ -66,17 +82,33 @@ LunarLander-v2:
   policy_kwargs: "dict(net_arch=[256, 256])"
 
 # Tuned
+# Acrobot-v1:
+#   n_timesteps: !!float 1e5
+#   policy: 'MlpPolicy'
+#   learning_rate: !!float 6.3e-4
+#   batch_size: 128
+#   buffer_size: 50000
+#   learning_starts: 0
+#   gamma: 0.99
+#   target_update_interval: 250
+#   train_freq: 4
+#   gradient_steps: -1
+#   exploration_fraction: 0.12
+#   exploration_final_eps: 0.1
+#   policy_kwargs: "dict(net_arch=[256, 256])"
+
+# MC hypers
 Acrobot-v1:
-  n_timesteps: !!float 1e5
+  n_timesteps: !!float 1.2e5
   policy: 'MlpPolicy'
-  learning_rate: !!float 6.3e-4
+  learning_rate: !!float 4e-3
   batch_size: 128
-  buffer_size: 50000
-  learning_starts: 0
-  gamma: 0.99
-  target_update_interval: 250
-  train_freq: 4
-  gradient_steps: -1
-  exploration_fraction: 0.12
-  exploration_final_eps: 0.1
+  buffer_size: 10000
+  learning_starts: 1000
+  gamma: 0.98
+  target_update_interval: 600
+  train_freq: 16
+  gradient_steps: 8
+  exploration_fraction: 0.2
+  exploration_final_eps: 0.07
   policy_kwargs: "dict(net_arch=[256, 256])"
