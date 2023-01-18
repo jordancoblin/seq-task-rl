@@ -1,0 +1,184 @@
+program: train.py
+method: bayes
+metric:
+  goal: maximize
+  name: rollout/ep_rew_mean
+parameters:
+  wandb_project_name:
+    values:
+      - seq-task-rl
+    distribution: categorical
+  algo:
+    values:
+      - dqn
+    distribution: categorical
+  env:
+    values:
+      - MountainCar-v0
+    distribution: categorical
+track:
+    values:
+      - "true"
+      # - "false"
+    distribution: categorical
+  saved_hyperparams.learning_rate:
+    max: 0.008
+    min: 0.002
+    distribution: uniform
+command:
+  - ${args}
+  # saved_hyperparams.target_update_interval:
+  #   max: 1200
+  #   min: 300
+  #   distribution: int_uniform
+  # saved_hyperparams.exploration_final_eps:
+  #   max: 0.14
+  #   min: 0.035
+  #   distribution: uniform
+  # saved_hyperparams.exploration_fraction:
+  #   max: 0.4
+  #   min: 0.1
+  #   distribution: uniform
+  # saved_hyperparams.learning_starts:
+  #   max: 2000
+  #   min: 0
+  #   distribution: int_uniform
+  # saved_hyperparams.gradient_steps:
+  #   max: 16
+  #   min: -1
+  #   distribution: int_uniform
+  # saved_hyperparams.policy_kwargs:
+  #   values:
+  #     - dict(net_arch=[256
+  #     - 256])
+  #   distribution: categorical
+  # saved_hyperparams.n_timesteps:
+  #   max: 240000
+  #   min: 60000
+  #   distribution: int_uniform
+  # saved_hyperparams.buffer_size:
+  #   max: 20000
+  #   min: 5000
+  #   distribution: int_uniform
+  # saved_hyperparams.train_freq:
+  #   max: 32
+  #   min: 8
+  #   distribution: int_uniform
+  # saved_hyperparams.batch_size:
+  #   max: 256
+  #   min: 64
+  #   distribution: int_uniform
+  # saved_hyperparams.policy:
+  #   values:
+  #     - MlpPolicy
+  #   distribution: categorical
+  # saved_hyperparams.gamma:
+  #   max: 0.999
+  #   min: 0.95
+  #   distribution: uniform
+  # n_startup_trials:
+  #   max: 20
+  #   min: 5
+  #   distribution: int_uniform
+  # truncate_last_trajectory:
+  #   values:
+  #     - "true"
+  #     - "false"
+  #   distribution: categorical
+  # optimize_hyperparameters:
+  #   values:
+  #     - "true"
+  #     - "false"
+  #   distribution: categorical
+  # save_replay_buffer:
+  #   values:
+  #     - "true"
+  #     - "false"
+  #   distribution: categorical
+  # tensorboard_log:
+  #   values:
+  #     - ""
+  #   distribution: categorical
+  # no_optim_plots:
+  #   values:
+  #     - "true"
+  #     - "false"
+  #   distribution: categorical
+  # trained_agent:
+  #   values:
+  #     - ""
+  #   distribution: categorical
+  # eval_episodes:
+  #   max: 10
+  #   min: 3
+  #   distribution: int_uniform
+  # log_interval:
+  #   max: 0
+  #   min: -2
+  #   distribution: int_uniform
+  # num_threads:
+  #   max: 0
+  #   min: -2
+  #   distribution: int_uniform
+  # n_timesteps:
+  #   max: 0
+  #   min: -2
+  #   distribution: int_uniform
+  # n_eval_envs:
+  #   max: 2
+  #   min: 1
+  #   distribution: int_uniform
+  log_folder:
+    values:
+      - logs
+    distribution: categorical
+  # save_freq:
+  #   max: 0
+  #   min: -2
+  #   distribution: int_uniform
+  # eval_freq:
+  #   max: 50000
+  #   min: 12500
+  #   distribution: int_uniform
+  # progress:
+  #   values:
+  #     - "true"
+  #     - "false"
+  #   distribution: categorical
+  # n_trials:
+  #   max: 1000
+  #   min: 250
+  #   distribution: int_uniform
+  # verbose:
+  #   max: 2
+  #   min: 1
+  #   distribution: int_uniform
+  # vec_env:
+  #   values:
+  #     - dummy
+  #   distribution: categorical
+  # sampler:
+  #   values:
+  #     - tpe
+  #   distribution: categorical
+  # pruner:
+  #   values:
+  #     - median
+  #   distribution: categorical
+  # n_jobs:
+  #   max: 2
+  #   min: 1
+  #   distribution: int_uniform
+  # device:
+  #   values:
+  #     - auto
+  #   distribution: categorical
+  # uuid:
+  #   values:
+  #     - "true"
+  #     - "false"
+  #   distribution: categorical
+  # seed:
+  #   max: 202
+  #   min: 50
+  #   distribution: int_uniform

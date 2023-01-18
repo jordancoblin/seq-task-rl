@@ -51,6 +51,7 @@ from rl_zoo3.callbacks import SaveVecNormalizeCallback, TrialEvalCallback
 from rl_zoo3.hyperparams_opt import HYPERPARAMS_SAMPLER
 from rl_zoo3.utils import ALGOS, get_callback_list, get_class_by_name, get_latest_run_id, get_wrapper_class, linear_schedule
 
+RUNS_PER_TRIAL = 3
 
 class ExperimentManager:
     """
@@ -795,6 +796,100 @@ class ExperimentManager:
             raise optuna.exceptions.TrialPruned()
 
         return reward
+    
+    def multi_run_objective(self, trial: optuna.Trial, num_runs: int) -> float:
+
+        kwargs = self._hyperparams.copy()
+
+        # Hack to use DDPG/TD3 noise sampler
+        trial.n_actions = self.n_actions
+        # Hack when using HerReplayBuffer
+        trial.using_her_replay_buffer = kwargs.get("replay_buffer_class") == HerReplayBuffer
+        if trial.using_her_replay_buffer:
+            trial.her_kwargs = kwargs.get("replay_buffer_kwargs", {})
+        # Sample candidate hyperparameters
+        sampled_hyperparams = HYPERPARAMS_SAMPLER[self.algo](trial)
+        kwargs.update(sampled_hyperparams)
+
+        last_mean_rewards = []
+        for run in range(num_runs):
+            n_envs = 1 if self.algo == "ars" else self.n_envs
+            env = self.create_envs(n_envs, no_log=True)
+
+            # By default, do not activate verbose output to keep
+            # stdout clean with only the trials results
+            trial_verbosity = 0
+            # Activate verbose mode for the trial in debug mode
+            # See PR #214
+            if self.verbose >= 2:
+                trial_verbosity = self.verbose
+
+            model = ALGOS[self.algo](
+                env=env,
+                tensorboard_log=None,
+                # We do not seed the trial
+                seed=None,
+                verbose=trial_verbosity,
+                device=self.device,
+                **kwargs,
+            )
+
+            eval_env = self.create_envs(n_envs=self.n_eval_envs, eval_env=True)
+
+            optuna_eval_freq = int(self.n_timesteps / self.n_evaluations)
+            # Account for parallel envs
+            optuna_eval_freq = max(optuna_eval_freq // self.n_envs, 1)
+            # Use non-deterministic eval for Atari
+            path = None
+            if self.optimization_log_path is not None:
+                path = os.path.join(self.optimization_log_path, f"trial_{str(trial.number)}")
+            callbacks = get_callback_list({"callback": self.specified_callbacks})
+            eval_callback = TrialEvalCallback(
+                eval_env,
+                trial,
+                best_model_save_path=path,
+                log_path=path,
+                n_eval_episodes=self.n_eval_episodes,
+                eval_freq=optuna_eval_freq,
+                deterministic=self.deterministic_eval,
+            )
+            callbacks.append(eval_callback)
+
+            learn_kwargs = {}
+            # Special case for ARS
+            if self.algo == "ars" and self.n_envs > 1:
+                learn_kwargs["async_eval"] = AsyncEval(
+                    [lambda: self.create_envs(n_envs=1, no_log=True) for _ in range(self.n_envs)], model.policy
+                )
+
+            try:
+                model.learn(self.n_timesteps, callback=callbacks, **learn_kwargs)
+                # Free memory
+                model.env.close()
+                eval_env.close()
+            except (AssertionError, ValueError) as e:
+                # Sometimes, random hyperparams can generate NaN
+                # Free memory
+                model.env.close()
+                eval_env.close()
+                # Prune hyperparams that generate NaNs
+                print(e)
+                print("============")
+                print("Sampled hyperparams:")
+                pprint(sampled_hyperparams)
+                raise optuna.exceptions.TrialPruned()
+            is_pruned = eval_callback.is_pruned
+            reward = eval_callback.last_mean_reward
+
+            del model.env, eval_env
+            del model
+
+            if is_pruned:
+                raise optuna.exceptions.TrialPruned()
+
+            last_mean_rewards.append(reward)
+        
+        return np.mean(last_mean_rewards)
 
     def hyperparameters_optimization(self) -> None:
 
@@ -840,7 +935,7 @@ class ExperimentManager:
                 completed_trials = len(study.get_trials(states=counted_states))
                 if completed_trials < self.max_total_trials:
                     study.optimize(
-                        self.objective,
+                        lambda trial: self.multi_run_objective(trial, RUNS_PER_TRIAL),
                         n_jobs=self.n_jobs,
                         callbacks=[
                             MaxTrialsCallback(
@@ -850,7 +945,11 @@ class ExperimentManager:
                         ],
                     )
             else:
-                study.optimize(self.objective, n_jobs=self.n_jobs, n_trials=self.n_trials)
+                study.optimize(
+                    lambda trial: self.multi_run_objective(trial, RUNS_PER_TRIAL), 
+                    n_jobs=self.n_jobs, 
+                    n_trials=self.n_trials,
+                )
         except KeyboardInterrupt:
             pass
 
