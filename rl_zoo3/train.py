@@ -88,7 +88,7 @@ def train() -> None:
         "--pruner",
         help="Pruner to use when optimizing hyperparameters",
         type=str,
-        default="median",
+        default="none",
         choices=["halving", "median", "none"],
     )
     parser.add_argument("--n-startup-trials", help="Number of trials before using optuna sampler", type=int, default=10)
