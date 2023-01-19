@@ -60,3 +60,9 @@ for env_id in MaskVelocityWrapper.velocity_indices.keys():
         id=f"{name}NoVel-v{version}",
         entry_point=create_no_vel_env(env_id),
     )
+
+register(
+    id="SwitchingEnv-v0",
+    entry_point="rl_zoo3.envs.switching:SwitchingEnv",
+    kwargs={"env1": "MountainCar-v0", "env2": "Acrobot-v1", "switch_freq": 2e4},
+)

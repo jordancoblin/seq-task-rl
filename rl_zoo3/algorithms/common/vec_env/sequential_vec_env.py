@@ -9,7 +9,7 @@ from rl_zoo3.algorithms.common.vec_env.base_vec_env import VecEnv, VecEnvIndices
 from rl_zoo3.algorithms.common.vec_env.util import copy_obs_dict, dict_to_obs, obs_space_info
 
 
-class DummyVecEnv(VecEnv):
+class SequentialVecEnv(VecEnv):
     """
     Creates a simple vectorized wrapper for multiple environments, calling each environment in sequence on the current
     Python process. This is useful for computationally simple environment such as ``cartpole-v1``,
@@ -70,7 +70,7 @@ class DummyVecEnv(VecEnv):
         return seeds
 
     def reset(self) -> VecEnvObs:
-        # Reset buf_obs to support environment switching
+        # 
         self.buf_obs = OrderedDict([(k, np.zeros((self.num_envs,) + tuple(self.shapes[k]), dtype=self.dtypes[k])) for k in self.keys])
 
         for env_idx in range(self.num_envs):
